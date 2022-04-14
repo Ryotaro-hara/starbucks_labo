@@ -23,7 +23,7 @@ module App
       g.test_framework false
       g.test_framework :rspec,
         controller_specs: false,
-        view_specs: false,
+        view_specs: false
     end
   end
 end
