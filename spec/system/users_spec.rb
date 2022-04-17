@@ -33,10 +33,7 @@ RSpec.describe "Users", type: :system do
     describe "ログイン" do
       context "フォームの入力値が正常" do
         it "ログインが成功する事" do
-          visit new_user_session_path
-          fill_in "user[email]", with: user.email
-          fill_in "user[password]", with: user.password
-          click_on "ログイン"
+          login(user)
           expect(current_path).to eq root_path
           expect(page).to have_content "ログインに成功しました"
         end
@@ -50,6 +47,16 @@ RSpec.describe "Users", type: :system do
           expect(current_path).to eq new_user_session_path
           expect(page).to have_content "またはパスワードが違います"
         end
+      end
+    end
+  end
+  describe "ログイン後" do
+    describe "ログアウト機能" do
+      it "ログアウトに成功する事" do
+        login(user)
+        click_on "ログアウト"
+        expect(current_path).to eq root_path
+        expect(page).to have_content "ログアウトに成功しました"
       end
     end
   end
