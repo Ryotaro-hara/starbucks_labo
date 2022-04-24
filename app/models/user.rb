@@ -9,19 +9,8 @@ class User < ApplicationRecord
   validates :email, length: { maximum: 50 },
                     format: { with: VALID_EMAIL_REGEX, message: 'が有効ではありません' },
                     uniqueness: { case_sensitive: false }
+  validates :password, presence: true, length: { minimum: 6 }, on: :update
+  validates :password, confirmation: true, on: :update
 
   mount_uploader :image, ImageUploader
-  
-  def update_without_current_password(params, *options)
-    params.delete(:current_password)
-    
-    if params[:password].blank? && params[:password_confirmation].blank?
-      params.delete(:password)
-      params.delete(:password_confirmation)
-    end
-
-    result = update(params, *options)
-    clean_up_passwords
-    result
-  end
 end
