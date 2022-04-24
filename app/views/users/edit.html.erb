@@ -1,0 +1,38 @@
+<div class="col-md-offset-2">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <div class="edit-form-wrap">
+        <%= form_with model: @user do |f| %>
+          <div class="form-group image-form-wrap mb-4">
+            <% if current_user.image? %>
+              <%= image_tag current_user.image.url, class: "user-icon", width: '200px' ,height: '200px' %>
+            <% else %>
+              <%= image_tag "default_icon.jpeg", class: "user-icon", width: '200px' ,height: '200px' %>
+            <% end %>
+            <%= f.label :image, "画像を変更", class: "image-input-btn btn btn-outline-secondary" %>
+            <%= f.file_field :image, class: "image-form" %>
+          </div>
+          <div class="form-group mb-3">
+            <%= f.label :name ,"アカウント名" %>
+            <%= f.text_field :name, class: "form-control" %>
+            <p class="error-messages"><%= @user.errors.full_messages_for(:name)[0] %></P>
+          </div>
+          <div class="form-group mb-4">
+            <%= f.label :email ,"メールアドレス" %><br />
+            <%= f.text_field :email, class: "form-control" %>
+            <p class="error-messages"><%= @user.errors.full_messages_for(:email)[0] %></P>
+          </div>
+          <div>
+          <div class="actions mb-4">
+            <%= f.submit "更新する" , class: "btn btn-outline-primary w-25" %>
+            <%= link_to "戻る", user_path(current_user), class: "btn btn-outline-secondary w-25" %>
+          </div>
+        <% end %>
+        <p class="text-center">
+          パスワードの設定は
+          <%= link_to "こちら", edit_user_registration_path %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="user-show-container ms-5 me-5">
+  <div class="row pt-5 pt-md-10">
+    <div class="col-sm-5 col-12">
+      <div class="user-show text-center">
+        <div class="user-show-icon mb-5">
+          <% if current_user.image? %>
+            <%= image_tag current_user.image.url, class: "user-icon", width: '200px' ,height: '200px' %>
+          <% else %>
+            <%= image_tag "default_icon.jpeg", class: "user-icon", width: '200px' ,height: '200px' %>
+          <% end %>
+        </div>
+        <div class="user-info mb-5">
+          <div class="post-count mb-2 pt-2">投稿数</div>
+          <div class="like-count mb-2 pt-2">いいね数</div>
+        </div>
+        <%= link_to "編集する", edit_user_path(current_user), class: "btn btn-outline-secondary w-50 mb-3" %>
+        <p class="text-center mb-5">
+          パスワードの設定は
+          <%= link_to "こちら", edit_user_registration_path %>
+        </p>
+        <%= link_to "退会する", registration_path(current_user), data: { confirm: "退会すると全てのデータが削除されます。よろしいですか？" },  method: :delete, class: "btn btn-outline-danger w-50" %>
+      </div>
+    </div>
+    <div class="col-sm-7 col-12">
+      <!--投稿一覧・いいね一覧を表示予定-->
+    </div>
+  </div>
+</div>
