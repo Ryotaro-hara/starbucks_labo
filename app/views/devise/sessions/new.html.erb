@@ -3,6 +3,8 @@
     <h2 class="signin-title mb-4"><%= t('.sign_in') %></h2>
     <div class="form-signin mb-2">
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <p class="text-danger alert"><%= alert %></p>
+
         <div class="field">
           <%= f.email_field :email, autofocus: true, placeholder: "メールアドレス", class: "form-control mb-3" %>
         </div>
