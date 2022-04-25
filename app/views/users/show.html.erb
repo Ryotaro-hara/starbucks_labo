@@ -2,7 +2,7 @@
   <div class="row pt-5 pt-md-10">
     <div class="col-sm-5 col-12">
       <div class="user-show text-center">
-        <div class="user-show-icon mb-5">
+        <div class="user-show-icon mb-4">
           <% if current_user.image? %>
             <%= image_tag current_user.image.url, class: "user-icon", width: '200px' ,height: '200px' %>
           <% else %>
@@ -10,11 +10,13 @@
           <% end %>
         </div>
         <div class="user-info mb-5">
+          <div class="show-user-name fs-2"><%= @user.name %></div>
+          <div class="show-user-email mb-4"><%= @user.email %></div>
           <div class="post-count mb-2 pt-2">投稿数</div>
           <div class="like-count mb-2 pt-2">いいね数</div>
         </div>
         <%= link_to "編集する", edit_user_path(current_user), class: "btn btn-outline-secondary w-50 mb-3" %>
-        <p class="text-center mb-5">
+        <p class="text-center mb-3">
           パスワードの設定は
           <%= link_to "こちら", edit_user_registration_path %>
         </p>
