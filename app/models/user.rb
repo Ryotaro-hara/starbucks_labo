@@ -9,8 +9,6 @@ class User < ApplicationRecord
   validates :email, length: { maximum: 50 },
                     format: { with: VALID_EMAIL_REGEX, message: 'が有効ではありません' },
                     uniqueness: { case_sensitive: false }
-  validates :password, presence: true, length: { minimum: 6 }, on: :update
-  validates :password, confirmation: true, on: :update
 
   mount_uploader :image, ImageUploader
 end
