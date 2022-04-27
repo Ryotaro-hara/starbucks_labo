@@ -11,8 +11,12 @@
   </head>
 
   <body>
-    <p class="notice mt-4"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <%= render "shared/header" %>
+    <div class="main">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <%= yield %>
+    </div>
+    <%= render "shared/footer" %>
   </body>
 </html>
