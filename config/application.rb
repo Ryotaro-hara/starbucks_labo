@@ -26,5 +26,6 @@ module App
         controller_specs: false,
         view_specs: false
     end
+    config.time_zone = 'Tokyo'
   end
 end
