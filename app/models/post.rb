@@ -1,4 +1,6 @@
 class Post < ApplicationRecord
+  belongs_to :user
+  
   enum change: { ちょい変: 1, 激変: 2 }
   
   with_options presence: true do
