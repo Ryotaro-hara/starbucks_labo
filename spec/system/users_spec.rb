@@ -42,9 +42,11 @@ RSpec.describe "Users", type: :system do
       context "メールアドレス未入力" do
         it "ログインが失敗する事" do
           visit new_user_session_path
-          fill_in "user[email]", with: ""
-          fill_in "user[password]", with: user.password
-          click_on "ログイン"
+          within ".form-signin" do
+            fill_in "user[email]", with: ""
+            fill_in "user[password]", with: user.password
+            click_on "ログイン"
+          end
           expect(current_path).to eq new_user_session_path
           expect(page).to have_content "またはパスワードが違います"
         end
