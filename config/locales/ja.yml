@@ -1,0 +1,9 @@
+ja:
+  activerecord:
+    attributes:
+      post:
+        title:  タイトル
+        content: 投稿内容
+        extra_fee: 追加料金
+        change: カスタマイズレベル
+        image: 画像
