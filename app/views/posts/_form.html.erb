@@ -1,0 +1,39 @@
+<%= form_with(model:post, local: true) do |f| %>
+  <div class="mx-auto col col-sm-12">
+    <div class="row py-5">
+      <%= f.label :title ,"タイトルを入力する", class: "col-sm-4 col-12 fw-bold" %>
+      <%= f.text_field :title, placeholder: "タイトル", class: "form-control col" %>
+      <p class="error-messages"><%= @post.errors.full_messages_for(:title)[0] %></P>  
+    </div>
+    <div class="row py-5">
+      <%= f.label :content ,"投稿内容を入力する", class: "col-sm-4 col-12 fw-bold" %>
+      <%= f.text_area :content, placeholder: "投稿内容", size: "100x10", class: "form-control col" %>
+      <p class="error-messages"><%= post.errors.full_messages_for(:content)[0] %></P>
+    </div>
+    <div class="row py-5">
+      <%= f.label :extra_fee ,"追加料金を入力する", class: "col-sm-4 col-12 fw-bold" %>
+      <%= f.number_field :extra_fee, placeholder: "追加料金", class: "form-control col" %>
+      <p class="error-messages"><%= post.errors.full_messages_for(:extra_fee)[0] %></P>  
+    </div>
+    <div class="row py-5">
+      <%= f.label :change ,"カスタマイズレベル", class: "col-sm-4 col-12 fw-bold" %>
+      <div class="radio-inline col">
+        <%= f.label :ちょい変 %>
+        <%= f.radio_button :change, :ちょい変 %>
+      </div>
+      <div class="radio-inline col">
+        <%= f.label :激変 %>
+        <%= f.radio_button :change, :激変 %>
+      </div>
+      <p class="error-messages"><%= post.errors.full_messages_for(:change)[0] %></P>
+    </div>
+    <div class="row py-5">
+      <%= f.label :image, "画像を追加する", class: "col-sm-4 col-12 fw-bold" %>
+      <%= f.file_field :image, class: "col" %>
+      <p class="error-messages"><%= post.errors.full_messages_for(:image)[0] %></P>
+    </div>
+    <div class="actions my-5 text-center">
+      <%= f.submit "ドリンクを投稿する" , class: "btn btn-outline-secondary w-50" %>
+    </div>
+  </div>
+<% end %>  
