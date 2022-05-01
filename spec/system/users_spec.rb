@@ -22,7 +22,7 @@ RSpec.describe "Users", type: :system do
         it "ユーザー新規作成が失敗する事" do
           visit new_user_registration_path
           fill_in "user[name]", with: "Example User"
-          fill_in "user[email]", with: ""
+          fill_in "user[email]", with: nil
           fill_in "user[password]", with: "password"
           fill_in "user[password_confirmation]", with: "password"
           click_on "アカウント登録"
@@ -43,7 +43,7 @@ RSpec.describe "Users", type: :system do
         it "ログインが失敗する事" do
           visit new_user_session_path
           within ".form-signin" do
-            fill_in "user[email]", with: ""
+            fill_in "user[email]", with: nil
             fill_in "user[password]", with: user.password
             click_on "ログイン"
           end
