@@ -10,7 +10,7 @@ RSpec.describe "Posts", type: :system do
     end
 
     describe "表示テスト" do
-      it "データベースの情報が正しく表示されている事" do
+      it "postsテーブルのデータが正しく表示されている事" do
         expect(page).to have_content post.title
         expect(page).to have_content post.change
         expect(page).to have_content post.created_at.to_s(:datetime_jp)
@@ -125,6 +125,44 @@ RSpec.describe "Posts", type: :system do
         expect(current_path).to eq posts_path
         expect(page).to have_content "新規投稿に失敗しました"
         expect(page).to have_content "タイトルを入力してください"
+      end
+    end
+  end
+
+  describe "投稿詳細ページ" do
+    describe "表示テスト" do
+      it "postsテーブルのデータが正しく表示されている事" do
+        login(user)
+        visit post_path(post)
+        expect(page).to have_content post.title
+        expect(page).to have_content post.content
+        expect(page).to have_content post.change
+        expect(page).to have_content post.extra_fee
+        expect(page).to have_content post.created_at.to_s(:datetime_jp)
+        expect(page).to have_selector "img[src$='post.test.png']"
+      end
+
+      describe "ユーザー表示テスト" do
+        describe "ユーザー画像未登録の場合" do
+          it "投稿したユーザーの情報が正しく表示されている事" do
+            login(user)
+            visit post_path(post)
+            expect(page).to have_content post.user.name
+            expect(page).to have_selector "img[src*='default_icon']"
+          end
+        end
+
+        describe "ユーザーが画像登録済みの場合" do
+          let!(:post) { create(:post, user: user_with_image) }
+          let(:user_with_image) { create(:user, :with_image) }
+
+          it "投稿したユーザーの情報が正しく表示されている事" do
+            login(user_with_image)
+            visit post_path(post)
+            expect(page).to have_content post.user.name
+            expect(page).to have_selector "img[src$='test.jpg']"  
+          end
+        end
       end
     end
   end
