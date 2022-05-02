@@ -2,24 +2,26 @@
   <div class="row">
     <% @posts.each do |post| %>
       <div class="col-sm-6 col-md-4 col-xl-3">
-        <div class="card">
-          <%= image_tag post.image.url, class: "post_image w-100" %>
-          <div class="card-body">
-            <div class="card-title fs-5">
-              <%= post.title %>
-            </div>
-            <div class="card-change mb-2">
-              <% if post.change == "ちょい変" %>
-                <div class="badge bg-success"><%= post.change %></div>
-              <% else %>
-                <div class="badge bg-warning"><%= post.change %></div>
-              <% end %>
-            </div>
-            <div class="card-create d-flex justify-content-end">
-              <%= post.created_at.to_s(:datetime_jp) %>
+        <%= link_to post_path(post.id), class: "text-decoration-none text-black" do %>
+          <div class="card">
+            <%= image_tag post.image.url, class: "post_image w-100" %>
+            <div class="card-body">
+              <div class="card-title fs-5 no-underline">
+                <%= post.title %>
+              </div>
+              <div class="card-change mb-2">
+                <% if post.change == "ちょい変" %>
+                  <div class="badge bg-success"><%= post.change %></div>
+                <% else %>
+                  <div class="badge bg-warning"><%= post.change %></div>
+                <% end %>
+              </div>
+              <div class="card-create d-flex justify-content-end">
+                <%= post.created_at.to_s(:datetime_jp) %>
+              </div>
             </div>
           </div>
-        </div>
+        <% end %>
       </div>
     <% end %>
   </div>
