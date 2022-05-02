@@ -1,0 +1,33 @@
+<div class="post-show-container py-4 px-3">
+  <div class="row fs-3 px-3 mb-3"><%= @post.title %></div>
+  <div class="row">
+    <div class="col-md-6 col-12 mb-3">
+      <%= image_tag @post.image.url, class: "post-show-image w-100" %>
+      <div class="post-user-detile d-flex mt-4">
+        <div class="post-show-user-icon me-3">
+          <% if current_user.image? %>
+            <%= image_tag @post.user.image.url, class: "user-icon", width: '75px' ,height: '75px' %>
+          <% else %>
+            <%= image_tag "default_icon.jpeg", class: "user-icon", width: '75px' ,height: '75px' %>
+          <% end %>
+        </div>
+        <div class="post-show-user-name align-self-center fs-5"><%= @post.user.name %></div>
+      </div>
+    </div>
+    <div class="col-md-1 col-12"></div>
+    <div class="col-md-5 col-12 d-flex flex-column">
+      <div class="mb-auto w-100 p-3 bg-white"><%= @post.content %></div>
+      <div class="d-flex justify-content-between mt-3">
+        <% if @post.change == "ちょい変" %>
+          <div class="change-circle-success text-white bg-success align-self-center text-center"><%= @post.change %></div>
+        <% else %>
+          <div class="change-circle-warning text-white bg-warning align-self-center text-center"><%= @post.change %></div>
+        <% end %>
+        <div class="post-show-detile">
+          <p class="fs-5 d-flex justify-content-end">カスタマイズ料金: <%= @post.extra_fee %>円</p>
+          <p class="fs-5 d-flex justify-content-end"><%= @post.created_at.to_s(:datetime_jp) %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+.change-circle-success {
+  padding: 30px 10px;
+  border-radius: 50%;
+}
+
+.change-circle-warning {
+  padding: 30px 25px;
+  border-radius: 50%;  
+}
+
+@media screen and (min-width:768px) { 
+  .post-show-image {
+    height: 350px;
+    object-fit: cover;
+  }
+}
