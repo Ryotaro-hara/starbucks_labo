@@ -21,7 +21,7 @@ RSpec.describe "Posts", type: :request do
     end
 
     it "レスポンスが正しく返ってくる事" do
-      expect(response).to have_http_status(200)  
+      expect(response).to have_http_status(200)
     end
   end
 
@@ -57,6 +57,19 @@ RSpec.describe "Posts", type: :request do
         post posts_path, params: { post: invalid_post_params }
         expect(response.body).to include "新規投稿に失敗しました"
       end
+    end
+  end
+
+  describe "GET #show" do
+    it "レスポンスが正しく返ってくる事" do
+      sign_in user
+      get post_path(new_post)
+      expect(response).to have_http_status(200)
+    end
+
+    it "未ログインの場合、正常なレスポンスが返ってこない事" do
+      get post_path(new_post)
+      expect(response).not_to have_http_status(200)
     end
   end
 end
