@@ -5,7 +5,7 @@
       <%= image_tag @post.image.url, class: "post-show-image w-100" %>
       <div class="post-user-detile d-flex mt-4">
         <div class="post-show-user-icon me-3">
-          <% if current_user.image? %>
+          <% if @post.user.image? %>
             <%= image_tag @post.user.image.url, class: "user-icon", width: '75px' ,height: '75px' %>
           <% else %>
             <%= image_tag "default_icon.jpeg", class: "user-icon", width: '75px' ,height: '75px' %>
