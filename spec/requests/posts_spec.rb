@@ -9,7 +9,7 @@ RSpec.describe "Posts", type: :request do
       get root_path
     end
 
-    it "レスポンスが正しく返ってくる事" do
+    it "リクエストが成功する事" do
       expect(response).to have_http_status(200)
     end
   end
@@ -20,7 +20,7 @@ RSpec.describe "Posts", type: :request do
       get new_post_path
     end
 
-    it "レスポンスが正しく返ってくる事" do
+    it "リクエストが成功する事" do
       expect(response).to have_http_status(200)
     end
   end
@@ -34,6 +34,11 @@ RSpec.describe "Posts", type: :request do
     end
 
     context "パラメーターが有効な場合" do
+      it "リクエストが成功する事" do
+        post posts_path, params: { post: post_params }
+        expect(response).to have_http_status(302)
+      end
+
       it "データベースへの保存に成功する事" do
         expect{
           post posts_path, params: { post: post_params }
@@ -47,6 +52,11 @@ RSpec.describe "Posts", type: :request do
     end
 
     context "パラメーターが無効な場合" do
+      it "リクエストが成功する事" do
+        post posts_path, params: { post: invalid_post_params }
+        expect(response).to have_http_status(200)  
+      end
+
       it "データベースへの保存に失敗する事" do
         expect{
           post posts_path, params: { post: invalid_post_params }
@@ -61,7 +71,7 @@ RSpec.describe "Posts", type: :request do
   end
 
   describe "GET #show" do
-    it "レスポンスが正しく返ってくる事" do
+    it "リクエストが成功する事" do
       sign_in user
       get post_path(new_post)
       expect(response).to have_http_status(200)
@@ -79,7 +89,7 @@ RSpec.describe "Posts", type: :request do
       get edit_post_path(new_post)
     end
 
-    it "レスポンスが正しく返ってくる事" do
+    it "リクエストが成功する事" do
       expect(response).to have_http_status(200)
     end
 
