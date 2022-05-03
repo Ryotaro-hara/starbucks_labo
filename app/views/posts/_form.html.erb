@@ -33,7 +33,11 @@
       <p class="error-messages"><%= post.errors.full_messages_for(:image)[0] %></P>
     </div>
     <div class="actions my-5 text-center">
-      <%= f.submit "ドリンクを投稿する" , class: "btn btn-outline-secondary w-50" %>
+      <% if local_assigns[:edit_flag].present? %>
+        <%= f.submit "投稿を変更する" , class: "btn btn-outline-secondary w-50" %>
+      <% else %>
+        <%= f.submit "ドリンクを投稿する" , class: "btn btn-outline-secondary w-50" %>
+      <% end %>
     </div>
   </div>
 <% end %>  
