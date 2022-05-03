@@ -1,14 +1,16 @@
 <div class="post-show-container py-4 px-3">
   <div class="mb-3 d-flex justify-content-between">
     <div class="fs-3"><%= @post.title %></div>
-    <div class="dropdown">
-      <div class="fs-3" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="fa-solid fa-pen-to-square"></i>
+    <% if @post.user_id == current_user.id %>
+      <div class="dropdown">
+        <div class="fs-3" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="fa-solid fa-pen-to-square"></i>
+        </div>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+          <li><%= link_to "編集する", edit_post_path(@post.id), class: "dropdown-item", type: "button" %></li>
+        </ul>
       </div>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-        <li><%= link_to "編集する", edit_post_path(@post.id), class: "dropdown-item", type: "button" %></li>
-      </ul>
-    </div>
+    <% end %>
   </div>
   <div class="row">
     <div class="col-md-5 col-12 mb-3">
