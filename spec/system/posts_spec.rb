@@ -91,6 +91,11 @@ RSpec.describe "Posts", type: :system do
           end
           expect(current_path).to eq root_path
         end
+
+        it "投稿をクリックすると投稿詳細ページに遷移する事" do
+          click_on post.title
+          expect(current_path).to eq post_path(post)
+        end
       end
     end
   end
@@ -173,7 +178,17 @@ RSpec.describe "Posts", type: :system do
         end
       end
     end
+
+    describe "遷移テスト" do
+      it "編集するをクリックすると投稿編集ページに遷移する事" do
+        login(user)
+        visit post_path(post)
+        click_on "編集する"
+        expect(current_path).to eq edit_post_path(post)
+      end
+    end
   end
+
   describe "ユーザー編集ページ" do
     before do
       login(user)
