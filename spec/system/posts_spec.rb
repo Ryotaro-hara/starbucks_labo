@@ -100,31 +100,39 @@ RSpec.describe "Posts", type: :system do
       login(user)
       visit new_post_path
     end
-    
-    context "フォーム入力値が正常" do
-      it "新規投稿に成功する事" do
-        fill_in "post_title", with: "test_title"
-        fill_in "post_content", with: "test_content"
-        fill_in "post_extra_fee", with: 1
-        choose "post_change_ちょい変"
-        attach_file "post[image]", "#{Rails.root}/spec/factories/post.test.png"
-        click_on "ドリンクを投稿する"
-        expect(current_path).to eq root_path
-        expect(page).to have_content "新規投稿に成功しました"
+
+    describe "表示テスト" do
+      it "投稿ボタンが「ドリンクを投稿する」という表記になっている事" do
+        expect(page).to have_button "ドリンクを投稿する"
       end
     end
+    
+    describe "遷移テスト" do
+      context "フォーム入力値が正常" do
+        it "新規投稿に成功する事" do
+          fill_in "post_title", with: "test_title"
+          fill_in "post_content", with: "test_content"
+          fill_in "post_extra_fee", with: 1
+          choose "post_change_ちょい変"
+          attach_file "post[image]", "#{Rails.root}/spec/factories/post.test.png"
+          click_on "ドリンクを投稿する"
+          expect(current_path).to eq root_path
+          expect(page).to have_content "新規投稿に成功しました"
+        end
+      end
 
-    context "タイトルが未入力" do
-      it "新規投稿に失敗する事" do
-        fill_in "post_title", with: nil
-        fill_in "post_content", with: "test_content"
-        fill_in "post_extra_fee", with: 1
-        choose "post_change_ちょい変"
-        attach_file "post[image]", "#{Rails.root}/spec/factories/post.test.png"
-        click_on "ドリンクを投稿する"
-        expect(current_path).to eq posts_path
-        expect(page).to have_content "新規投稿に失敗しました"
-        expect(page).to have_content "タイトルを入力してください"
+      context "タイトルが未入力" do
+        it "新規投稿に失敗する事" do
+          fill_in "post_title", with: nil
+          fill_in "post_content", with: "test_content"
+          fill_in "post_extra_fee", with: 1
+          choose "post_change_ちょい変"
+          attach_file "post[image]", "#{Rails.root}/spec/factories/post.test.png"
+          click_on "ドリンクを投稿する"
+          expect(current_path).to eq posts_path
+          expect(page).to have_content "新規投稿に失敗しました"
+          expect(page).to have_content "タイトルを入力してください"
+        end
       end
     end
   end
@@ -163,6 +171,55 @@ RSpec.describe "Posts", type: :system do
             expect(page).to have_selector "img[src$='test.jpg']"  
           end
         end
+      end
+    end
+  end
+  describe "ユーザー編集ページ" do
+    before do
+      login(user)
+      visit edit_post_path(post)
+    end
+    
+    describe "表示テスト" do
+      it "投稿ボタンが「投稿を変更する」という表記になっている事" do
+        expect(page).to have_button "投稿を変更する"
+      end
+    end
+
+    describe "遷移テスト" do
+      let(:another_user_post) { create(:post) }
+
+      context "フォーム入力値が正常" do
+        it "投稿編集に成功する事" do
+          fill_in "post_title", with: "edit_test_title"
+          fill_in "post_content", with: "edit_test_content"
+          fill_in "post_extra_fee", with: 1
+          choose "post_change_ちょい変"
+          attach_file "post[image]", "#{Rails.root}/spec/factories/post.test.png"
+          click_on "投稿を変更する"
+          expect(current_path).to eq post_path(post)
+          expect(page).to have_content "投稿を更新しました"
+        end
+      end
+
+      context "タイトルが未入力" do
+        it "投稿編集に失敗する事" do
+          fill_in "post_title", with: nil
+          fill_in "post_content", with: "edit_test_content"
+          fill_in "post_extra_fee", with: 1
+          choose "post_change_ちょい変"
+          attach_file "post[image]", "#{Rails.root}/spec/factories/post.test.png"
+          click_on "投稿を変更する"
+          expect(current_path).to eq "/posts/#{post.id}"
+          expect(page).to have_content "投稿の編集に失敗しました"
+          expect(page).to have_content "タイトルを入力してください"
+        end
+      end
+
+      it "投稿作成者以外が編集しようとするとトップページに戻される事" do
+        visit edit_post_path(another_user_post)
+        expect(current_path).to eq root_path
+        expect(page).to have_content "他のユーザーの投稿は編集できません"
       end
     end
   end
