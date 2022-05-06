@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: :index
-  before_action :set_target_post, only: [:show, :edit, :update]
-  before_action :ensure_correct_user, only: [:edit, :update]
+  before_action :set_target_post, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def index
     @posts = Post.all
@@ -34,6 +34,11 @@ class PostsController < ApplicationController
       flash.now[:alert] = "投稿の編集に失敗しました"
       render "edit"
     end
+  end
+
+  def destroy
+    @post.destroy
+    redirect_to root_path, notice: "投稿を削除しました"  
   end
 
   private
