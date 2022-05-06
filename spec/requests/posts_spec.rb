@@ -141,4 +141,26 @@ RSpec.describe "Posts", type: :request do
       end
     end
   end
+
+  describe "delete #destroy" do
+    before do
+      sign_in user
+    end
+
+    it "リクエストに成功する事" do
+      delete post_path(new_post)
+      expect(response).to have_http_status(302)
+    end
+
+    it "投稿が削除されること" do
+      expect do
+        delete post_path(new_post)
+      end.to change { Post.count }.by(-1)
+    end
+
+    it "リダイレクトに成功する事" do
+      delete post_path(new_post)
+      expect(response).to redirect_to root_path 
+    end
+  end
 end
