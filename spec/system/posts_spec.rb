@@ -189,7 +189,7 @@ RSpec.describe "Posts", type: :system do
     end
   end
 
-  describe "ユーザー編集ページ" do
+  describe "投稿編集ページ" do
     before do
       login(user)
       visit edit_post_path(post)
@@ -236,6 +236,21 @@ RSpec.describe "Posts", type: :system do
         expect(current_path).to eq root_path
         expect(page).to have_content "他のユーザーの投稿は編集できません"
       end
+    end
+  end
+
+  describe "投稿削除テスト" do
+    before do
+      login(user)
+    end
+
+    it "「削除する」をクリックすると投稿が削除される事" do
+      visit post_path(post)
+      expect do
+        click_on "削除する"
+      end.to change { Post.count }.by(-1)
+      expect(current_path).to eq root_path
+      expect(page).to have_content "投稿を削除しました"
     end
   end
 end
