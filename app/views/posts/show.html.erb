@@ -8,6 +8,7 @@
         </div>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
           <li><%= link_to "編集する", edit_post_path(@post.id), class: "dropdown-item", type: "button" %></li>
+          <li><%= link_to "削除する", post_path(@post.id), method: :delete, class: "dropdown-item", type: "button" %></li>
         </ul>
       </div>
     <% end %>
