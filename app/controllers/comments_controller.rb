@@ -7,8 +7,8 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to post_path(@post), notice: "コメントしました"
     else
-      render post_path(@post)
-      flash.now[:alert] = "コメントに失敗しました"
+      redirect_back fallback_location: @comment.post
+      flash[:alert] = "コメントに失敗しました"
     end
   end
 

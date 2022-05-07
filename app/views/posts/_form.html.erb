@@ -3,7 +3,7 @@
     <div class="row py-5">
       <%= f.label :title ,"タイトルを入力する", class: "col-sm-4 col-12 fw-bold" %>
       <%= f.text_field :title, placeholder: "タイトル", class: "form-control col" %>
-      <p class="error-messages"><%= @post.errors.full_messages_for(:title)[0] %></P>  
+      <p class="error-messages"><%= post.errors.full_messages_for(:title)[0] %></P>  
     </div>
     <div class="row py-5">
       <%= f.label :content ,"投稿内容を入力する", class: "col-sm-4 col-12 fw-bold" %>
