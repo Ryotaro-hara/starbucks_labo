@@ -1,5 +1,6 @@
 class Post < ApplicationRecord
   belongs_to :user
+  has_many :comments, dependent: :destroy
   
   enum change: { ちょい変: 1, 激変: 2 }
   
