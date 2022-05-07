@@ -143,6 +143,8 @@ RSpec.describe "Posts", type: :system do
   end
 
   describe "投稿詳細ページ" do
+    let!(:comment) { create(:comment, user: user, post: post) }
+
     describe "表示テスト" do
       it "postsテーブルのデータが正しく表示されている事" do
         login(user)
@@ -185,6 +187,32 @@ RSpec.describe "Posts", type: :system do
         visit post_path(post)
         click_on "編集する"
         expect(current_path).to eq edit_post_path(post)
+      end
+
+      it "フォーム入力値が正常な場合コメントに成功する事" do
+        login(user)
+        visit post_path(post)
+        fill_in "comment[comment_content]", with: "Example comment"
+        click_on "コメントする"
+        expect(current_path).to eq post_path(post)
+        expect(page).to have_content "コメントしました"
+      end
+
+      it "コメントが空欄の場合失敗する事" do
+        login(user)
+        visit post_path(post)
+        fill_in "comment[comment_content]", with: nil
+        click_on "コメントする"
+        expect(current_path).to eq post_path(post)
+        expect(page).to have_content "コメントに失敗しました"
+      end
+
+      it "コメント削除をクリックすると削除に成功する事" do
+        login(user)
+        visit post_path(post)
+        click_on "コメント削除"
+        expect(current_path).to eq post_path(post)
+        expect(page).to have_content "コメントを削除しました" 
       end
     end
   end
