@@ -18,7 +18,7 @@
         <%= link_to "編集する", edit_user_path(current_user), class: "btn btn-outline-secondary w-50 mb-3" %>
         <p class="text-center mb-3">
           パスワードの設定は
-          <%= link_to "こちら", edit_user_registration_path %>
+          <%= link_to "こちら", edit_user_registration_path, class: "text-decoration-none" %>
         </p>
         <%= link_to "退会する", registration_path(current_user), data: { confirm: "退会すると全てのデータが削除されます。よろしいですか？" },  method: :delete, class: "btn btn-outline-danger w-50" %>
       </div>
