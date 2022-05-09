@@ -1,6 +1,6 @@
 <% if post.favorite?(current_user) %>
   <%= link_to post_favorites_path(post.id), method: :delete, class: "text-decoration-none", remote: true do %>
-    <div class="text-danger border border-2 border-danger p-2 rounded">❤︎ いいね <%= post.favorites.count %></div>
+    <div class="text-danger border border-2 border-danger p-2 rounded favorite-create">❤︎ いいね <%= post.favorites.count %></div>
   <% end %>
 <% else %>
   <%= link_to post_favorites_path(post.id), class: "text-decoration-none", method: :post, remote: true do %>

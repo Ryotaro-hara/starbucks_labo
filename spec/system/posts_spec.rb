@@ -144,6 +144,7 @@ RSpec.describe "Posts", type: :system do
 
   describe "投稿詳細ページ" do
     let!(:comment) { create(:comment, user: user, post: post) }
+    let!(:favorite) { create(:favorite, user: user, post: post) }
 
     describe "表示テスト" do
       it "postsテーブルのデータが正しく表示されている事" do
@@ -155,6 +156,15 @@ RSpec.describe "Posts", type: :system do
         expect(page).to have_content post.extra_fee
         expect(page).to have_content post.created_at.to_s(:datetime_jp)
         expect(page).to have_selector "img[src$='post.test.png']"
+      end
+
+      it "「♡」をクリックするといいね数が変化し「❤︎」に切り替わること" do
+        login(user)
+        visit post_path(post)
+        find(".favorite-create").click
+        expect(page).to have_content "❤︎"
+        expect(page).not_to have_content "♡"
+        expect(post.favorites.count).to eq(1)
       end
 
       describe "ユーザー表示テスト" do
