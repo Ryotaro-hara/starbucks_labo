@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe "Posts", type: :system do
   let!(:post) { create(:post, user: user) }
   let(:user) { create(:user) }
+  let!(:comment) { create(:comment, user: user, post: post) }
+  let!(:favorite) { create(:favorite, user: user, post: post) }
 
   describe "掲示板一覧ページ" do
     before do
@@ -15,6 +17,16 @@ RSpec.describe "Posts", type: :system do
         expect(page).to have_content post.change
         expect(page).to have_content post.created_at.to_s(:datetime_jp)
         expect(page).to have_selector "img[src$='post.test.png']"
+      end
+
+      it "usersテーブルのデータが正しく表示されている事" do
+        expect(page).to have_content post.user.name
+        expect(page).to have_selector "img[src*='default_icon']"  
+      end
+
+      it "commentsテーブルとfavoritesテーブルのデータが正しく表示されている事" do
+        expect(page).to have_content post.comments.count
+        expect(page).to have_content post.favorites.count
       end
 
       describe "ログイン前" do
@@ -143,9 +155,6 @@ RSpec.describe "Posts", type: :system do
   end
 
   describe "投稿詳細ページ" do
-    let!(:comment) { create(:comment, user: user, post: post) }
-    let!(:favorite) { create(:favorite, user: user, post: post) }
-
     describe "表示テスト" do
       it "postsテーブルのデータが正しく表示されている事" do
         login(user)
