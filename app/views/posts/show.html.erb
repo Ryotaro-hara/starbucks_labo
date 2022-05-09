@@ -1,6 +1,11 @@
 <div class="post-show-container py-4 px-3">
-  <div class="mb-3 d-flex justify-content-between">
-    <div class="fs-3"><%= @post.title %></div>
+  <div class="mb-3 d-flex">
+    <div class="fs-3 me-auto"><%= @post.title %></div>
+    <div class="me-4">
+      <div id="favorite_buttons_<%= @post.id %>">
+        <%= render "favorites/favorites", post: @post %>  
+      </div>
+    </div>
     <% if @post.user_id == current_user.id %>
       <div class="dropdown">
         <div class="fs-3" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
