@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def index
-    @posts = Post.all
+    @posts = Post.page(params[:page])
   end
 
   def new
