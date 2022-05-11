@@ -7,3 +7,8 @@ ja:
         extra_fee: 追加料金
         change: カスタマイズレベル
         image: 画像
+  views:
+    pagination:
+      previous: <
+      next: '>'
+      truncate: ...
