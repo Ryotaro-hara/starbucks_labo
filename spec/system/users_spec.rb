@@ -2,7 +2,10 @@ require 'rails_helper'
 
 RSpec.describe "Users", type: :system do
   let(:user) { create(:user) }
+  let(:another_user) { create(:user) }
   let(:user_with_image) { create(:user, :with_image) }
+  let!(:post) { create(:post, user: user) }
+  let!(:favorite) { create(:favorite, post: post, user: another_user) }
 
   describe "ログイン前" do
     describe "アカウント新規登録" do
@@ -53,6 +56,7 @@ RSpec.describe "Users", type: :system do
       end
     end
   end
+
   describe "ログイン後" do
     describe "ユーザー編集" do
       it "ユーザー編集に成功する事" do
@@ -89,24 +93,73 @@ RSpec.describe "Users", type: :system do
         expect(page).to have_content "ログアウトに成功しました"
       end
     end
-  end
 
-  describe "表示テスト" do
-    it "アイコン画像未登録の場合" do
-      login(user)
-      visit user_path(user)
-      expect(page).to have_content user.name
-      expect(page).to have_content user.email
-      expect(page).to have_selector "img[src*='default_icon']"
-    end
+    describe "表示テスト" do
+      describe "マイページ" do
+        context "アイコン画像未登録の場合" do
+          it "ユーザー情報が正しく表示されている事" do
+            login(user)
+            visit user_path(user)
+            expect(page).to have_content user.name
+            expect(page).to have_content user.email
+            expect(page).to have_selector "img[src*='default_icon']"
+          end
+        end
 
-    context "アイコン画像登録済みの場合" do
-      it "ユーザー情報が正しく表示されている事" do
-        login(user_with_image)
-        visit user_path(user_with_image)
-        expect(page).to have_content user_with_image.name
-        expect(page).to have_content user_with_image.email
-        expect(page).to have_selector "img[src$='test.jpg']"
+        context "アイコン画像登録済みの場合" do
+          it "ユーザー情報が正しく表示されている事" do
+            login(user_with_image)
+            visit user_path(user_with_image)
+            expect(page).to have_content user_with_image.name
+            expect(page).to have_content user_with_image.email
+            expect(page).to have_selector "img[src$='test.jpg']"
+          end
+        end
+
+        it "投稿数といいね数が正しく表示されている事" do
+          login(user)
+          visit user_path(user)
+          expect(page).to have_content user.posts.count
+          expect(page).to have_content user.favorites.count
+        end
+
+        describe "一覧表示テスト" do
+          context "投稿といいねした投稿がある場合" do
+            it "「投稿一覧」をクリックすると自分の投稿が表示される事" do
+              login(user)
+              visit user_path(user)
+              find(".posts-index-button").click
+              expect(page).to have_content post.title
+              expect(page).to have_content post.change
+              expect(page).to have_content post.created_at.to_s(:datetime_jp)
+              expect(page).to have_selector "img[src$='post.test.png']"
+            end
+
+            it "「いいね一覧」をクリックするといいねをした投稿の一覧が表示される事" do
+              login(another_user)
+              visit user_path(another_user)
+              find(".favorites-index-button").click
+              expect(page).to have_content post.title
+              expect(page).to have_content post.change
+              expect(page).to have_content post.created_at.to_s(:datetime_jp)
+              expect(page).to have_selector "img[src$='post.test.png']"
+            end
+          end
+
+          context "投稿またはいいねした投稿がない場合" do
+            it "投稿がない場合「投稿一覧」をクリックすると「現在投稿はありません」と表示される事" do
+              login(another_user)
+              visit user_path(another_user)
+              expect(page).to have_content "現在投稿はありません"
+            end
+
+            it "いいねした投稿がない場合「いいね一覧」をクリックすると「現在いいねをした投稿はありません」と表示される事" do
+              login(user)
+              visit user_path(user)
+              expect(page).to have_content "現在いいねをした投稿はありません"
+            end
+          end
+        end
       end
     end
   end
@@ -136,6 +189,22 @@ RSpec.describe "Users", type: :system do
       visit edit_user_registration_path
       click_on "こちら"
       expect(current_path).to eq edit_user_path(user)
+    end
+
+    it "マイページの投稿一覧の投稿をクリックすると詳細ページへと遷移する事" do
+      login(user)
+      visit user_path(user)
+      find(".posts-index-button").click
+      click_on post.title
+      expect(current_path).to eq post_path(post)
+    end
+
+    it "マイページのいいね一覧の投稿をクリックすると投稿詳細ページへと遷移する事" do
+      login(another_user)
+      visit user_path(another_user)
+      find(".favorites-index-button").click
+      click_on post.title
+      expect(current_path).to eq post_path(post)
     end
   end
 end
