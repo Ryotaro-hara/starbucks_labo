@@ -10,6 +10,7 @@ import "channels"
 import "jquery"
 import "bootstrap"
 import "../src/application"
+import "./switch_index"
 
 Rails.start()
 Turbolinks.start()
