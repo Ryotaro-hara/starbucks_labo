@@ -1,7 +1,7 @@
 <div class="user-show-container ms-5 me-5">
   <div class="row py-5 py-md-10">
-    <div class="col-sm-5 col-12">
-      <div class="user-show text-center">
+    <div class="col-md-4 col-12">
+      <div class="user-show text-center mb-4">
         <div class="user-show-icon mb-4">
           <% if current_user.image? %>
             <%= image_tag current_user.image.url, class: "user-icon", width: '200px' ,height: '200px' %>
@@ -23,8 +23,17 @@
         <%= link_to "退会する", registration_path(current_user), data: { confirm: "退会すると全てのデータが削除されます。よろしいですか？" },  method: :delete, class: "btn btn-outline-danger w-50" %>
       </div>
     </div>
-    <div class="col-sm-7 col-12">
-      <!--投稿一覧・いいね一覧を表示予定-->
+    <div class="col-md-8 col-12">
+      <div class="text-center mb-5 mt-3">
+        <div class="btn-group" role="group" aria-label="swich button">
+          <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+          <label class="btn btn-outline-secondary me-3 rounded-end posts-index-button" for="btnradio1">投稿一覧</label>
+          <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+          <label class="btn btn-outline-secondary rounded-start favorites-index-button" for="btnradio2">いいね一覧</label>
+        </div>
+      </div>
+      <%= render partial: "posts_index", locals: { post: @post } %>
+      <%= render partial: "favorites_index", locals: { posts: @posts } %>
     </div>
   </div>
 </div>

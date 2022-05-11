@@ -1,0 +1,42 @@
+<div class="container-fluid favorites-index">
+  <div class="row">
+    <% posts.each do |posts| %>
+        <div class="col-sm-6 col-12">
+          <% if posts.favorite?(current_user) %>
+            <%= link_to post_path(posts.id), class: "text-decoration-none text-black" do %>
+              <div class="user-liked-container">
+                <%= image_tag posts.image.url, class: "post_image w-100" %>
+                <div class="card-body">
+                  <div class="post-user-detile d-flex mb-2">
+                    <div class="post-show-user-icon me-3">
+                      <% if posts.user.image? %>
+                        <%= image_tag posts.user.image.url, class: "user-icon", width: '40px' ,height: '40px' %>
+                      <% else %>
+                        <%= image_tag "default_icon.jpeg", class: "user-icon", width: '40px' ,height: '40px' %>
+                      <% end %>
+                    </div>
+                    <div class="post-show-user-name align-self-center"><%= posts.user.name %></div>
+                  </div>
+                  <div class="card-title fs-5 no-underline">
+                    <%= posts.title %>
+                  </div>
+                  <div class="card-change mb-2 d-flex">
+                    <% if posts.change == "ちょい変" %>
+                      <div class="badge bg-success me-auto"><%= posts.change %></div>
+                    <% else %>
+                      <div class="badge bg-warning me-auto"><%= posts.change %></div>
+                    <% end %>
+                    <div class="text-secondary me-1"><i class="fa-regular fa-heart"></i><%= posts.favorites.count %></div>
+                    <div class="text-secondary"><i class="fa-regular fa-comment"></i><%= posts.comments.count %></div>
+                  </div>
+                  <div class="card-create d-flex justify-content-end text-secondary">
+                    <%= posts.created_at.to_s(:datetime_jp) %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+    <% end %>
+  </div>
+</div>
