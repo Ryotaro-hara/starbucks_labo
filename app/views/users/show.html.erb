@@ -12,8 +12,8 @@
         <div class="user-info mb-5">
           <div class="show-user-name fs-2"><%= @user.name %></div>
           <div class="show-user-email mb-4"><%= @user.email %></div>
-          <div class="post-count mb-2 pt-2">投稿数</div>
-          <div class="like-count mb-2 pt-2">いいね数</div>
+          <div class="posts-count border-top border-secondary mb-2 pt-2">投稿数 <%= @post.count %></div>
+          <div class="favorites-count border-top border-secondary mb-2 pt-2">いいね数 <%= @user.favorites.count %></div>
         </div>
         <%= link_to "編集する", edit_user_path(current_user), class: "btn btn-outline-secondary w-50 mb-3" %>
         <p class="text-center mb-3">
@@ -33,7 +33,7 @@
         </div>
       </div>
       <%= render partial: "posts_index", locals: { post: @post } %>
-      <%= render partial: "favorites_index", locals: { posts: @posts } %>
+      <%= render partial: "favorites_index", locals: { posts: @posts, user: @user } %>
     </div>
   </div>
 </div>

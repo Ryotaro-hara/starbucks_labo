@@ -1,6 +1,9 @@
 <div class="container-fluid favorites-index">
-  <div class="row">
+  <% if user.favorites.count == 0 %>
+    <div class="text-center">現在いいねをした投稿はありません</div>
+  <% else %>
     <% posts.each do |posts| %>
+      <div class="row">
         <div class="col-sm-6 col-12">
           <% if posts.favorite?(current_user) %>
             <%= link_to post_path(posts.id), class: "text-decoration-none text-black" do %>
@@ -37,6 +40,7 @@
             <% end %>
           <% end %>
         </div>
+      </div>  
     <% end %>
-  </div>
+  <% end %>
 </div>
