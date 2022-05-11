@@ -2,3 +2,34 @@
   height: 300px;
   object-fit: cover;
 }
+
+/*paginate*/
+.pagination>li {
+  margin: 0 5px;
+}
+
+.pagination>li>a {          
+  border: none;
+  padding: 15px 22px;   
+  color: #696969;
+  border-radius: 50%;
+}
+
+.pagination>.active>a {     
+  border-radius: 50%;
+  background-color: rgb(25,135,83) !important;;   
+}
+
+.pagination>li>a:hover {        
+  border-radius: 50%;   
+}
+
+.page-item:first-child .page-link {
+  border-top-left-radius: 50% !important;
+  border-bottom-left-radius: 50% !important;
+}
+
+.page-item:last-child .page-link {
+  border-top-right-radius: 50% !important;
+  border-bottom-right-radius: 50% !important;
+}
