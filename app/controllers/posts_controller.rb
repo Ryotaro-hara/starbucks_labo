@@ -3,9 +3,11 @@ class PostsController < ApplicationController
   before_action :set_target_post, only: [:show, :edit, :update, :destroy]
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
+  MAX_LIKED_POSTS_COUNT = 5
+
   def index
     @posts = Post.page(params[:page])
-    @all_ranks = Post.find(Favorite.group(:post_id).order("count(post_id) desc").limit(5).pluck(:post_id))
+    @all_ranks = Post.find(Favorite.group(:post_id).order("count(post_id) desc").limit(MAX_LIKED_POSTS_COUNT).pluck(:post_id))
   end
 
   def new
