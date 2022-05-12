@@ -70,6 +70,45 @@ RSpec.describe "Posts", type: :system do
             expect(current_path).to eq "/posts/page/2"
           end
         end
+
+        describe "カルーセルの表示テスト" do
+          let!(:post2) { create(:post, title: "テスト投稿2", user: user) }
+          let!(:post3) { create(:post, title: "テスト投稿3", user: user) }
+          let!(:post4) { create(:post, title: "テスト投稿4", user: user) }
+          let!(:post5) { create(:post, title: "テスト投稿5", user: user) }
+          let!(:post6) { create(:post, title: "テスト投稿6", user: user) }
+          let!(:favorite2) { create(:favorite, user: user, post: post2) }
+          let!(:favorite3) { create(:favorite, user: user, post: post3) }
+          let!(:favorite4) { create(:favorite, user: user, post: post4) }
+          let!(:favorite5) { create(:favorite, user: user, post: post5) }
+
+          before do
+            visit root_path  
+          end
+
+          it "カルーセルにいいね順に5件、投稿が表示される事" do
+            within ".carousel" do
+              expect(page).to have_content post.title
+              expect(page).to have_content post2.title
+              expect(page).to have_content post3.title
+              expect(page).to have_content post4.title
+              expect(page).to have_content post5.title
+            end
+          end
+
+          it "カルーセルにいいね順が6番目の投稿が表示されない事" do
+            within ".carousel" do
+              expect(page).not_to have_content post6.title  
+            end
+          end
+
+          it "カルーセルの投稿をクリックすると詳細ページに遷移する事" do
+            within ".carousel" do
+              click_on post2.title
+            end
+            expect(current_path).to eq post_path(post2)
+          end
+        end
       end
     end
 
