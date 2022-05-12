@@ -5,6 +5,7 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.page(params[:page])
+    @all_ranks = Post.find(Favorite.group(:post_id).order("count(post_id) desc").limit(5).pluck(:post_id))
   end
 
   def new
