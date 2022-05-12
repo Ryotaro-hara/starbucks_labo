@@ -33,3 +33,9 @@
   border-top-right-radius: 50% !important;
   border-bottom-right-radius: 50% !important;
 }
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+  width: 4rem !important;
+  height: 4rem !important;
+  border-radius: 50%;
+}
