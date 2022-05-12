@@ -51,6 +51,25 @@ RSpec.describe "Posts", type: :system do
             expect(page).to have_content "ログアウト"
           end
         end
+
+        describe "ページネーションテスト" do
+          let!(:post_list) { create_list(:post, 13, user: user) }
+
+          before do
+            visit root_path  
+          end
+
+          it "ページリンクがある事" do
+            expect(page).to have_selector ".pagination"
+          end
+
+          it "「2」をクリックすると次のページに遷移する事" do
+            within ".pagination" do
+              click_on "2", match: :first
+            end
+            expect(current_path).to eq "/posts/page/2"
+          end
+        end
       end
     end
 
@@ -105,7 +124,9 @@ RSpec.describe "Posts", type: :system do
         end
 
         it "投稿をクリックすると投稿詳細ページに遷移する事" do
-          click_on post.title
+          within ".posts-list" do
+            click_on post.title
+          end
           expect(current_path).to eq post_path(post)
         end
       end
