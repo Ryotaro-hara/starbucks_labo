@@ -2,10 +2,10 @@
   <% if user.favorites.count == 0 %>
     <div class="text-center">現在いいねをした投稿はありません</div>
   <% else %>
-    <% posts.each do |posts| %>
-      <div class="row">
-        <div class="col-sm-6 col-12">
-          <% if posts.favorite?(current_user) %>
+    <div class="row">
+      <% posts.each do |posts| %>
+        <% if posts.favorite?(current_user) %>
+          <div class="col-xl-4 col-sm-6 col-12">
             <%= link_to post_path(posts.id), class: "text-decoration-none text-black" do %>
               <div class="user-liked-container">
                 <%= image_tag posts.image.url, class: "post_image w-100" %>
@@ -38,9 +38,9 @@
                 </div>
               </div>
             <% end %>
-          <% end %>
-        </div>
-      </div>  
-    <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div> 
   <% end %>
 </div>

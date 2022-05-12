@@ -2,9 +2,9 @@
   <% if post.count == 0 %>
     <div class="text-center">現在投稿はありません</div>
   <% else %>
-    <% post.each do |post| %>
-      <div class="row">
-        <div class="col-sm-6 col-12">
+    <div class="row">
+      <% post.each do |post| %>
+        <div class="col-xl-4 col-sm-6 col-12">
           <%= link_to post_path(post.id), class: "text-decoration-none text-black" do %>
             <div class="user-liked-container">
               <%= image_tag post.image.url, class: "post_image w-100" %>
@@ -38,7 +38,7 @@
             </div>
           <% end %>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   <% end %>
 </div>
