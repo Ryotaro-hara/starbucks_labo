@@ -1,4 +1,13 @@
 <% provide(:title,  "投稿一覧") %>
+<div class="first-view">
+  <div class="text-center py-4"><%= image_tag "first_view_logo.png" %></div>
+  <p class="text-white text-center fs-5">Starbucks LaboはStarbucks coffeeのドリンクを追加カスタマイズする事で生まれる
+  <br>自分だけの新しい一杯をシェアできるサービスです</p>
+  <div class="text-center mt-5"><%= link_to "入口はこちら", new_user_registration_path, class: "entry-btn text-decoration-none" %></div>
+</div>
+<div class="text-center bg-white py-4">
+  <h5 class="text-success py-3 border border-success">人気のカスタマイズ</h5>
+</div>
 <%= render partial: "carousel", locals: { all_ranks: @all_ranks } %>
 <div class="container-fluid posts-list">
   <div class="row mx-2 pt-3">

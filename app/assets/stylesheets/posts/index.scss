@@ -39,3 +39,20 @@
   height: 4rem !important;
   border-radius: 50%;
 }
+
+.first-view {
+  height: 400px;
+  background-color: rgb(25,135,83);
+}
+
+.entry-btn {
+  color: white;
+  border: 2px solid white;
+  padding: 10px 15px;
+  border-radius: 20px;
+}
+
+.entry-btn:hover {
+  color: white;
+  opacity: 0.5;
+}
