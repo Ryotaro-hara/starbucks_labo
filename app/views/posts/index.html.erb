@@ -1,6 +1,6 @@
 <% provide(:title,  "投稿一覧") %>
 <%= render partial: "carousel", locals: { all_ranks: @all_ranks } %>
-<div class="container-fluid">
+<div class="container-fluid posts-list">
   <div class="row mx-2 pt-3">
     <% @posts.each do |post| %>
       <div class="col-sm-6 col-md-4 col-xl-3">
