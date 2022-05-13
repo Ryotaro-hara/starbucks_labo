@@ -21,7 +21,7 @@
   <%= paginate @posts %>
   <div class="row mx-2">
     <% @posts.each do |post| %>
-      <div class="col-sm-6 col-md-4 col-xl-3">
+      <div class="col-sm-6 col-lg-4 col-xl-3">
         <%= link_to post_path(post.id), class: "text-decoration-none text-black" do %>
           <div class="card">
             <%= image_tag post.image.url, class: "post_image w-100" %>
