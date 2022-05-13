@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_08_075600) do
+ActiveRecord::Schema.define(version: 2022_05_13_011517) do
 
   create_table "comments", charset: "utf8mb4", force: :cascade do |t|
     t.text "comment_content", null: false
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 2022_05_08_075600) do
     t.integer "change", default: 0, null: false
     t.string "image"
     t.integer "user_id"
+    t.string "drink_type"
   end
 
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
