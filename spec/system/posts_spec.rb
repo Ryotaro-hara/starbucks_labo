@@ -33,7 +33,7 @@ RSpec.describe "Posts", type: :system do
 
       it "usersテーブルのデータが正しく表示されている事" do
         expect(page).to have_content post.user.name
-        expect(page).to have_selector "img[src*='default_icon']"  
+        expect(page).to have_selector "img[src*='default_icon']"
       end
 
       it "commentsテーブルとfavoritesテーブルのデータが正しく表示されている事" do
@@ -47,7 +47,7 @@ RSpec.describe "Posts", type: :system do
             expect(page).to have_content "ログイン"
             expect(page).to have_content "新規登録"
           end
-        end 
+        end
       end
 
       describe "ログイン後" do
@@ -68,7 +68,7 @@ RSpec.describe "Posts", type: :system do
           let!(:post_list) { create_list(:post, 13, user: user) }
 
           before do
-            visit root_path  
+            visit root_path
           end
 
           it "ページリンクがある事" do
@@ -95,7 +95,7 @@ RSpec.describe "Posts", type: :system do
           let!(:favorite5) { create(:favorite, user: user, post: post5) }
 
           before do
-            visit root_path  
+            visit root_path
           end
 
           it "カルーセルにいいね順に5件、投稿が表示される事" do
@@ -110,7 +110,7 @@ RSpec.describe "Posts", type: :system do
 
           it "カルーセルにいいね順が6番目の投稿が表示されない事" do
             within ".carousel" do
-              expect(page).not_to have_content post6.title  
+              expect(page).not_to have_content post6.title
             end
           end
 
@@ -184,7 +184,7 @@ RSpec.describe "Posts", type: :system do
     end
   end
 
-  describe "新規投稿ページ" do    
+  describe "新規投稿ページ" do
     before do
       login(user)
       visit new_post_path
@@ -195,7 +195,7 @@ RSpec.describe "Posts", type: :system do
         expect(page).to have_button "ドリンクを投稿する"
       end
     end
-    
+
     describe "遷移テスト" do
       context "フォーム入力値が正常" do
         it "新規投稿に成功する事" do
@@ -268,7 +268,7 @@ RSpec.describe "Posts", type: :system do
             login(user_with_image)
             visit post_path(post)
             expect(page).to have_content post.user.name
-            expect(page).to have_selector "img[src$='test.jpg']"  
+            expect(page).to have_selector "img[src$='test.jpg']"
           end
         end
       end
@@ -305,7 +305,7 @@ RSpec.describe "Posts", type: :system do
         visit post_path(post)
         click_on "コメント削除"
         expect(current_path).to eq post_path(post)
-        expect(page).to have_content "コメントを削除しました" 
+        expect(page).to have_content "コメントを削除しました"
       end
     end
   end
@@ -315,7 +315,7 @@ RSpec.describe "Posts", type: :system do
       login(user)
       visit edit_post_path(post)
     end
-    
+
     describe "表示テスト" do
       it "投稿ボタンが「投稿を変更する」という表記になっている事" do
         expect(page).to have_button "投稿を変更する"
@@ -378,7 +378,7 @@ RSpec.describe "Posts", type: :system do
   end
 
   describe "季節限定ページテスト" do
-    let!(:not_seasonal_post) { create(:post, title: "期間限定表示テスト",drink_type: "フラペチーノ", user: user) }
+    let!(:not_seasonal_post) { create(:post, title: "期間限定表示テスト", drink_type: "フラペチーノ", user: user) }
 
     before do
       login(user)

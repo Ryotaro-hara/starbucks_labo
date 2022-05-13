@@ -21,6 +21,7 @@ RSpec.describe "Users", type: :system do
           expect(page).to have_content "アカウント登録が完了しました"
         end
       end
+
       context "メールアドレスが未入力" do
         it "ユーザー新規作成が失敗する事" do
           visit new_user_registration_path
@@ -34,6 +35,7 @@ RSpec.describe "Users", type: :system do
         end
       end
     end
+
     describe "ログイン" do
       context "フォームの入力値が正常" do
         it "ログインが成功する事" do
@@ -42,6 +44,7 @@ RSpec.describe "Users", type: :system do
           expect(page).to have_content "ログインに成功しました"
         end
       end
+
       context "メールアドレス未入力" do
         it "ログインが失敗する事" do
           visit new_user_session_path

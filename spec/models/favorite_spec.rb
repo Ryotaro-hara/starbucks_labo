@@ -10,6 +10,6 @@ RSpec.describe Favorite, type: :model do
       another_favorite = build(:favorite, post: post, user: user)
       another_favorite.valid?
       expect(another_favorite.errors.full_messages).to include "Postはすでに存在します"
-    end  
+    end
   end
 end

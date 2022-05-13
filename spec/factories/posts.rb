@@ -5,7 +5,7 @@ FactoryBot.define do
     drink_type { "期間限定ドリンク" }
     extra_fee { 1 }
     change { "ちょい変" }
-    image { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/factories/post.test.png'))}
+    image { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/factories/post.test.png')) }
     association :user
 
     trait :invalid do

@@ -32,7 +32,7 @@ RSpec.describe User, type: :model do
         user = create(:user)
         user2 = build(:user, email: user.email)
         user2.valid?
-        expect(user2.errors[:email]).to include "はすでに存在します"  
+        expect(user2.errors[:email]).to include "はすでに存在します"
       end
 
       it "メールアドレスが51文字以上の場合無効である事" do

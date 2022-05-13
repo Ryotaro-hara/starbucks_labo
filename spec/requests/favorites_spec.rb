@@ -18,8 +18,8 @@ RSpec.describe "Favorites", type: :request do
   end
 
   describe "DELETE #destroy" do
-    let!(:favorite) { create(:favorite, user: user, post: post_new) }  
-    
+    let!(:favorite) { create(:favorite, user: user, post: post_new) }
+
     it "データの保存に成功する事" do
       expect do
         delete post_favorites_path(post_new.id), xhr: true

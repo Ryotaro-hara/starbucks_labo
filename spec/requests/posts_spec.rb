@@ -40,9 +40,9 @@ RSpec.describe "Posts", type: :request do
       end
 
       it "データベースへの保存に成功する事" do
-        expect{
+        expect {
           post posts_path, params: { post: post_params }
-        }.to change(user.posts, :count).by(1)  
+        }.to change(user.posts, :count).by(1)
       end
 
       it "リダイレクトに成功する事" do
@@ -54,11 +54,11 @@ RSpec.describe "Posts", type: :request do
     context "パラメーターが無効な場合" do
       it "リクエストが成功する事" do
         post posts_path, params: { post: invalid_post_params }
-        expect(response).to have_http_status(200)  
+        expect(response).to have_http_status(200)
       end
 
       it "データベースへの保存に失敗する事" do
-        expect{
+        expect {
           post posts_path, params: { post: invalid_post_params }
         }.not_to change(user.posts, :count)
       end
@@ -115,7 +115,7 @@ RSpec.describe "Posts", type: :request do
       end
 
       it "titleが更新される事" do
-        expect { 
+        expect {
           patch post_path(new_post), params: { post: post_params }
         }.to change { new_post.reload.title }.from("テスト投稿").to("other")
       end
@@ -123,21 +123,21 @@ RSpec.describe "Posts", type: :request do
 
     context "パラメーターが異常な場合" do
       let(:invalid_post_params) { attributes_for(:post, :invalid) }
-      
+
       it "リクエストが成功する事" do
         patch post_path(new_post), params: { post: invalid_post_params }
-        expect(response).to have_http_status(200)  
+        expect(response).to have_http_status(200)
       end
 
       it "titleが更新されない事" do
-        expect { 
+        expect {
           patch post_path(new_post), params: { post: invalid_post_params }
         }.not_to change(new_post.reload, :title)
       end
 
       it "エラーが表示される事" do
         patch post_path(new_post), params: { post: invalid_post_params }
-        expect(response.body).to include "投稿の編集に失敗しました"  
+        expect(response.body).to include "投稿の編集に失敗しました"
       end
     end
   end
@@ -160,7 +160,7 @@ RSpec.describe "Posts", type: :request do
 
     it "リダイレクトに成功する事" do
       delete post_path(new_post)
-      expect(response).to redirect_to root_path 
+      expect(response).to redirect_to root_path
     end
   end
 

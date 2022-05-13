@@ -27,7 +27,7 @@ RSpec.describe Post, type: :model do
       it "ドリンクの種類がなければ無効である事" do
         post = build(:post, drink_type: nil)
         post.valid?
-        expect(post.errors[:drink_type]).to include "を入力してください"  
+        expect(post.errors[:drink_type]).to include "を入力してください"
       end
 
       it "追加料金がなければ無効である事" do

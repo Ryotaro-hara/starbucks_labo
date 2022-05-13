@@ -17,7 +17,7 @@ class UsersController < ApplicationController
       redirect_to user_path(current_user), flash: { notice: "ユーザー情報を編集しました。" }
     else
       render "edit"
-    end  
+    end
   end
 
   private
