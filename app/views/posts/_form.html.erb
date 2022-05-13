@@ -11,6 +11,12 @@
       <p class="error-messages"><%= post.errors.full_messages_for(:content)[0] %></P>
     </div>
     <div class="row py-5">
+      <%= f.label :drink_type ,"ドリンクの種類を入力する", class: "col-sm-4 col-12 fw-bold" %>
+      <%= f.select :drink_type,  ["期間限定ドリンク", "エスプレッソドリンク", "フラペチーノ", "その他"],
+        { include_blank: "選択してください"}, class: "form-control col" %>
+      <p class="error-messages"><%= post.errors.full_messages_for(:drink_type)[0] %></P>  
+    </div>
+    <div class="row py-5">
       <%= f.label :extra_fee ,"追加料金を入力する", class: "col-sm-4 col-12 fw-bold" %>
       <%= f.number_field :extra_fee, placeholder: "追加料金", class: "form-control col" %>
       <p class="error-messages"><%= post.errors.full_messages_for(:extra_fee)[0] %></P>  
