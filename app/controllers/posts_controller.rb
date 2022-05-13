@@ -46,6 +46,10 @@ class PostsController < ApplicationController
     redirect_to root_path, notice: "投稿を削除しました"  
   end
 
+  def seasonal
+    @posts = Post.where(drink_type: "期間限定ドリンク")
+  end
+
   private
 
   def post_params

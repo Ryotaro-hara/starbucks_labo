@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :edit, :update]
   resources :posts do
     get "page/:page", action: :index, on: :collection
+    get :seasonal, action: :seasonal, on: :collection
     resources :comments, only: [:create, :destroy]
     resource :favorites, only: [:create, :destroy]
   end
