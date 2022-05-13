@@ -6,7 +6,8 @@
   </div>
 </div>
 <div class="container-fluid posts-seasonal-list">
-  <div class="row mx-2 pt-3">
+  <%= paginate @posts %>
+  <div class="row mx-2">
     <% @posts.each do |post| %>
       <div class="col-sm-6 col-md-4 col-xl-3">
         <%= link_to post_path(post.id), class: "text-decoration-none text-black" do %>
@@ -45,3 +46,5 @@
     <% end %>
   </div>
 </div>
+
+<%= paginate @posts %>
