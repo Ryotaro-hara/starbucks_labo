@@ -27,7 +27,7 @@
                     <% if posts.change == "ちょい変" %>
                       <div class="badge bg-success me-auto"><%= posts.change %></div>
                     <% else %>
-                      <div class="badge bg-warning me-auto"><%= posts.change %></div>
+                      <div class="badge bg-danger me-auto"><%= posts.change %></div>
                     <% end %>
                     <div class="text-secondary me-1"><i class="fa-regular fa-heart"></i><%= posts.favorites.count %></div>
                     <div class="text-secondary"><i class="fa-regular fa-comment"></i><%= posts.comments.count %></div>
