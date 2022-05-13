@@ -78,3 +78,9 @@
   color: rgb(25,135,83);
   opacity: 0.5;  
 }
+
+.card-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;  
+}
