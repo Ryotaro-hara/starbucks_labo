@@ -147,7 +147,7 @@ RSpec.describe "Posts", type: :request do
       sign_in user
     end
 
-    it "リクエストに成功する事" do
+    it "リクエストが成功する事" do
       delete post_path(new_post)
       expect(response).to have_http_status(302)
     end
@@ -161,6 +161,16 @@ RSpec.describe "Posts", type: :request do
     it "リダイレクトに成功する事" do
       delete post_path(new_post)
       expect(response).to redirect_to root_path 
+    end
+  end
+
+  describe "GET #seasonal" do
+    before do
+      get seasonal_posts_path
+    end
+
+    it "リクエストが成功する事" do
+      expect(response).to have_http_status(200)
     end
   end
 end
