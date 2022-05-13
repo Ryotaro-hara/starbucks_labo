@@ -1,6 +1,13 @@
+/*index*/
 .post_image {
   height: 300px;
   object-fit: cover;
+}
+
+.card-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /*paginate*/
@@ -34,12 +41,14 @@
   border-bottom-right-radius: 50% !important;
 }
 
+/*carousel*/
 .carousel-control-prev-icon, .carousel-control-next-icon {
   width: 4rem !important;
   height: 4rem !important;
   border-radius: 50%;
 }
 
+/*first-view*/
 .first-view {
   height: 400px;
   background-color: rgb(25,135,83);
@@ -57,6 +66,7 @@
   opacity: 0.5;
 }
 
+/*seasonal*/
 .seasonal {
   background-image: url(seasonal.jpg);
   background-size: cover;
@@ -79,10 +89,4 @@
 .seasnal-btn:hover {
   color: rgb(25,135,83);
   opacity: 0.5;
-}
-
-.card-title {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
