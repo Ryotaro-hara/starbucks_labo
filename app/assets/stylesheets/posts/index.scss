@@ -56,3 +56,25 @@
   color: white;
   opacity: 0.5;
 }
+
+.seasonal {
+  background-image: url(seasonal.jpg);
+  background-size: cover;
+  width: 100%;
+  height: 400px;
+}
+
+.seasonal h3, p, .seasnal-btn {
+  opacity: 0.7;
+  font-family: serif;
+}
+.seasnal-btn {
+  color: rgb(25,135,83);
+  border: 2px solid rgb(25,135,83);
+  padding: 20px 30px;
+  border-radius: 40px;  
+}
+.seasnal-btn:hover {
+  color: rgb(25,135,83);
+  opacity: 0.5;  
+}

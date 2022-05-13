@@ -9,8 +9,17 @@
   <h5 class="text-success py-3 border border-success">人気のカスタマイズ</h5>
 </div>
 <%= render partial: "carousel", locals: { all_ranks: @all_ranks } %>
+<div class="seasonal pt-5">
+  <div class="col-sm-8 col-9 text-success text-center ps-3">
+    <h3 class="pt-5">期間限定のカスタマイズ</h3>
+    <p class="pt-5">季節限定のドリンクのカスタマイズを<br>楽しみたい方はこちら</p>
+    <div class="text-center pt-5"><%= link_to "期間限定ページ", seasonal_posts_path, class: "seasnal-btn text-decoration-none" %></div>
+  </div>
+</div>
+<div class="bg-white py-3"></div>
 <div class="container-fluid posts-list">
-  <div class="row mx-2 pt-3">
+  <%= paginate @posts %>
+  <div class="row mx-2">
     <% @posts.each do |post| %>
       <div class="col-sm-6 col-md-4 col-xl-3">
         <%= link_to post_path(post.id), class: "text-decoration-none text-black" do %>
