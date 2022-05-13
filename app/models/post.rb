@@ -8,6 +8,7 @@ class Post < ApplicationRecord
   with_options presence: true do
     validates :title
     validates :content
+    validates :drink_type
     validates :extra_fee
     validates :change
     validates :image

@@ -4,6 +4,7 @@ ja:
       post:
         title:  タイトル
         content: 投稿内容
+        drink_type: ドリンクの種類
         extra_fee: 追加料金
         change: カスタマイズレベル
         image: 画像
