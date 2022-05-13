@@ -40,7 +40,7 @@
         <% if @post.change == "ちょい変" %>
           <div class="change-circle-success text-white bg-success align-self-center text-center"><%= @post.change %></div>
         <% else %>
-          <div class="change-circle-warning text-white bg-warning align-self-center text-center"><%= @post.change %></div>
+          <div class="change-circle-danger text-white bg-warning align-self-center text-center"><%= @post.change %></div>
         <% end %>
         <div class="post-show-detile">
           <p class="fs-5 d-flex justify-content-end">カスタマイズ料金: <%= @post.extra_fee %>円</p>
