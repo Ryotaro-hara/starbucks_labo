@@ -11,6 +11,18 @@ RSpec.describe "Posts", type: :system do
       visit root_path
     end
 
+    describe "遷移テスト" do
+      it "「入口はこちら」をクリックすると新規登録ページに遷移する事" do
+        click_on "入口はこちら"
+        expect(current_path).to eq new_user_registration_path
+      end
+
+      it "「期間限定ページ」をクリックすると季節限定カスタマイズの投稿ページに遷移する事" do
+        click_on "期間限定ページ"
+        expect(current_path).to eq seasonal_posts_path
+      end
+    end
+
     describe "表示テスト" do
       it "postsテーブルのデータが正しく表示されている事" do
         expect(page).to have_content post.title
@@ -64,7 +76,7 @@ RSpec.describe "Posts", type: :system do
           end
 
           it "「2」をクリックすると次のページに遷移する事" do
-            within ".pagination" do
+            within ".posts-list .pagination" do
               click_on "2", match: :first
             end
             expect(current_path).to eq "/posts/page/2"
@@ -189,6 +201,7 @@ RSpec.describe "Posts", type: :system do
         it "新規投稿に成功する事" do
           fill_in "post_title", with: "test_title"
           fill_in "post_content", with: "test_content"
+          select "期間限定ドリンク", from: "ドリンクの種類を入力する"
           fill_in "post_extra_fee", with: 1
           choose "post_change_ちょい変"
           attach_file "post[image]", "#{Rails.root}/spec/factories/post.test.png"
@@ -202,6 +215,7 @@ RSpec.describe "Posts", type: :system do
         it "新規投稿に失敗する事" do
           fill_in "post_title", with: nil
           fill_in "post_content", with: "test_content"
+          select "期間限定ドリンク", from: "ドリンクの種類を入力する"
           fill_in "post_extra_fee", with: 1
           choose "post_change_ちょい変"
           attach_file "post[image]", "#{Rails.root}/spec/factories/post.test.png"
@@ -315,6 +329,7 @@ RSpec.describe "Posts", type: :system do
         it "投稿編集に成功する事" do
           fill_in "post_title", with: "edit_test_title"
           fill_in "post_content", with: "edit_test_content"
+          select "期間限定ドリンク", from: "ドリンクの種類を入力する"
           fill_in "post_extra_fee", with: 1
           choose "post_change_ちょい変"
           attach_file "post[image]", "#{Rails.root}/spec/factories/post.test.png"
@@ -328,6 +343,7 @@ RSpec.describe "Posts", type: :system do
         it "投稿編集に失敗する事" do
           fill_in "post_title", with: nil
           fill_in "post_content", with: "edit_test_content"
+          select "期間限定ドリンク", from: "ドリンクの種類を入力する"
           fill_in "post_extra_fee", with: 1
           choose "post_change_ちょい変"
           attach_file "post[image]", "#{Rails.root}/spec/factories/post.test.png"
@@ -358,6 +374,37 @@ RSpec.describe "Posts", type: :system do
       end.to change { Post.count }.by(-1)
       expect(current_path).to eq root_path
       expect(page).to have_content "投稿を削除しました"
+    end
+  end
+
+  describe "季節限定ページテスト" do
+    let!(:not_seasonal_post) { create(:post, title: "期間限定表示テスト",drink_type: "フラペチーノ", user: user) }
+
+    before do
+      login(user)
+      visit seasonal_posts_path
+    end
+
+    describe "表示テスト" do
+      it "ドリンクの種類が「期間限定ドリンク」の投稿が正しく表示される事" do
+        expect(page).to have_content post.title
+        expect(page).to have_content post.change
+        expect(page).to have_content post.created_at.to_s(:datetime_jp)
+        expect(page).to have_selector "img[src$='post.test.png']"
+        expect(page).to have_content post.comments.count
+        expect(page).to have_content post.favorites.count
+      end
+
+      it "ドリンクの種類が「期間限定ドリンク」ではない投稿が表示されない事" do
+        expect(page).not_to have_content not_seasonal_post.title
+      end
+    end
+
+    describe "遷移テスト" do
+      it "投稿をクリックすると詳細に遷移する事" do
+        click_on post.title
+        expect(current_path).to eq post_path(post)
+      end
     end
   end
 end
