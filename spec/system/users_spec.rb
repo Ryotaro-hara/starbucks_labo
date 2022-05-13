@@ -94,6 +94,18 @@ RSpec.describe "Users", type: :system do
       end
     end
 
+    describe "退会機能" do
+      it "「退会する」をクリックするとアカウントを削除出来る事" do
+        login(user)
+        visit user_path(user)
+        expect do
+          click_on "退会する"
+        end.to change { User.count }.by(-1)
+        expect(current_path).to eq root_path
+        expect(page).to have_content "アカウントを削除しました。またのご利用をお待ちしております。"
+      end
+    end
+
     describe "表示テスト" do
       describe "マイページ" do
         context "アイコン画像未登録の場合" do
