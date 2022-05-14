@@ -14,3 +14,14 @@
     object-fit: cover;
   }
 }
+
+@media screen and (max-width:768px) {
+  .post-show-contents {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .post-show-edits {
+    justify-content: space-between;
+  }
+}

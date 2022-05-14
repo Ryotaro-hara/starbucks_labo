@@ -1,23 +1,25 @@
 <% provide(:title,  @post.title) %>
 <div class="post-show-container py-4 px-3">
-  <div class="mb-3 d-flex">
+  <div class="mb-3 d-flex post-show-contents">
     <div class="fs-3 me-auto"><%= @post.title %></div>
-    <div class="me-4">
-      <div id="favorite_buttons_<%= @post.id %>">
-        <%= render "favorites/favorites", post: @post %>  
-      </div>
-    </div>
-    <% if @post.user_id == current_user.id %>
-      <div class="dropdown">
-        <div class="fs-3" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-          <i class="fa-solid fa-pen-to-square"></i>
+    <div class="d-flex post-show-edits">
+      <div class="me-4">
+        <div id="favorite_buttons_<%= @post.id %>">
+          <%= render "favorites/favorites", post: @post %>  
         </div>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-          <li><%= link_to "編集する", edit_post_path(@post.id), class: "dropdown-item", type: "button" %></li>
-          <li><%= link_to "削除する", post_path(@post.id), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "dropdown-item", type: "button" %></li>
-        </ul>
       </div>
-    <% end %>
+      <% if @post.user_id == current_user.id %>
+        <div class="dropdown">
+          <div class="fs-3" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa-solid fa-pen-to-square"></i>
+          </div>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <li><%= link_to "編集する", edit_post_path(@post.id), class: "dropdown-item", type: "button" %></li>
+            <li><%= link_to "削除する", post_path(@post.id), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "dropdown-item", type: "button" %></li>
+          </ul>
+        </div>
+      <% end %>
+    </div>
   </div>
   <div class="row">
     <div class="col-md-5 col-12 mb-3">
@@ -35,7 +37,7 @@
     </div>
     <div class="col-md-1 col-12"></div>
     <div class="col-md-6 col-12 d-flex flex-column">
-      <div class="mb-auto w-100 p-3 bg-white"><%= @post.content %></div>
+      <div class="mb-auto w-100 p-3 bg-white"><%= safe_join(@post.content.split("\n"),tag(:br)) %></div>
       <div class="d-flex justify-content-between mt-3">
         <% if @post.change == "ちょい変" %>
           <div class="change-circle-success text-white bg-success align-self-center text-center"><%= @post.change %></div>
