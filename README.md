@@ -26,7 +26,7 @@ Starbucks　Laboはstarbucks coffeeのドリンクの自分だけのお気に入
 4.期間限定ページ
 今だけのドリンクのカスタマイズ投稿を確認する事が出来ます。
 
-##　デモ画像
+## デモ画像
 
 *投稿詳細ページ
 
@@ -36,6 +36,38 @@ Starbucks　Laboはstarbucks coffeeのドリンクの自分だけのお気に入
 
 ![starbucks-labo4](https://user-images.githubusercontent.com/94495458/168612023-a7a89b49-8b92-4255-86fd-04d5464c1407.png)
 
+## 使用技術
 
+* Ruby 2.7.5
+* Ruby on Rails 6.1.4
+* MySQL 5.7
+* Docker/Docker-compose
+* Rspec
+* Rubocop
+* AWS
+  * S3
+* Heroku
 
+## 機能一覧
+
+* ユーザー登録、ログイン機能(devise)
+* 投稿機能（画像:carrierwave)
+* いいね機能
+* コメント機能
+* ページネーション機能(kaminari)
+* 期間限定ページ機能
+
+## テスト
+
+* Rspec
+  * 単体テスト(model)
+  * 機能テスト(request)
+  * 統合テスト(feature)
+* Rubocop
+
+## ゲストアカウント
+
+*　ゲスト用ログインアカウント
+  *　 メールアドレス: guest@gmail.com
+  *　 パスワード: guestlogin
 
