@@ -67,7 +67,7 @@ Starbucks　Laboはstarbucks coffeeのドリンクの自分だけのお気に入
 
 ## ゲストアカウント
 
-*　ゲスト用ログインアカウント
+* ゲスト用ログインアカウント
   *　 メールアドレス: guest@gmail.com
   *　 パスワード: guestlogin
 
