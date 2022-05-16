@@ -6,7 +6,8 @@ Starbucks　Laboはstarbucks coffeeのドリンクの自分だけのお気に入
 仕事中や勉強中の一杯、頑張った時のご褒美の一杯、休日の朝の一杯。そんな一杯一杯が特別な一杯であって欲しい。そんな思いでサイトを作るに至りました。
 
 *トップページ
-![top_page](https://user-images.githubusercontent.com/94495458/168611006-19bf76e9-289c-47b1-ab88-c2504e1e6d2a.png)
+
+![starbucks-labo1](https://user-images.githubusercontent.com/94495458/168611216-97ee655f-9258-4597-a319-fdd3db81f35c.png)
 
 ## 使い方
 
@@ -24,6 +25,17 @@ Starbucks　Laboはstarbucks coffeeのドリンクの自分だけのお気に入
 
 4.期間限定ページ
 今だけのドリンクのカスタマイズ投稿を確認する事が出来ます。
+
+##　デモ画像
+
+*投稿詳細ページ
+
+![starbucks-labo3](https://user-images.githubusercontent.com/94495458/168611867-9d180999-b9a5-44fb-a681-96bbc53267f3.png)
+
+*マイページ
+
+![starbucks-labo4](https://user-images.githubusercontent.com/94495458/168612023-a7a89b49-8b92-4255-86fd-04d5464c1407.png)
+
 
 
 
