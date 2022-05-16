@@ -1,24 +1,29 @@
-# README
+# Starbucks　Labo
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## 概要
 
-Things you may want to cover:
+Starbucks　Laboはstarbucks coffeeのドリンクの自分だけのお気に入りのカスタマイズをシェアしあえるコミニュティーサイトです。
+仕事中や勉強中の一杯、頑張った時のご褒美の一杯、休日の朝の一杯。そんな一杯一杯が特別な一杯であって欲しい。そんな思いでサイトを作るに至りました。
 
-* Ruby version
+*トップページ
+![top_page](https://user-images.githubusercontent.com/94495458/168611006-19bf76e9-289c-47b1-ab88-c2504e1e6d2a.png)
 
-* System dependencies
+## 使い方
 
-* Configuration
+1.アカウント登録・ログイン
+名前、メールアドレス、パスワードを設定する事でアカウントが作成できます。
+ログインに関してはアカウント登録後メールアドレス・パスワードを入力する事で可能となります。
 
-* Database creation
+2.新規投稿
+ドリンクのタイトルなど必要項目を記入する事で可能となります。
+投稿したユーザーのみ詳細ページより編集・削除を行えます。
 
-* Database initialization
+3.いいね・コメントをする
+投稿詳細ページよりいいね・コメントを行う事が出来ます。
+いいねした投稿はマイページより確認できます。
 
-* How to run the test suite
+4.期間限定ページ
+今だけのドリンクのカスタマイズ投稿を確認する事が出来ます。
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
 
-* ...
