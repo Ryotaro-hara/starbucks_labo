@@ -65,6 +65,10 @@ Starbucks　Laboはstarbucks coffeeのドリンクの自分だけのお気に入
   * 統合テスト(feature)
 * Rubocop
 
+## ER図
+
+![ER図](https://user-images.githubusercontent.com/94495458/168694306-87387c58-15c6-4e65-bc33-8321d3f6f171.png)
+
 ## ゲストアカウント
 
 * ゲスト用ログインアカウント
