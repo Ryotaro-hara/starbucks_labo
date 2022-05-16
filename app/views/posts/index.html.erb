@@ -1,6 +1,9 @@
 <% provide(:title,  "投稿一覧") %>
 <div class="first-view">
-  <div class="text-center py-4"><%= image_tag "first_view_logo.png" %></div>
+  <div class="text-center py-4">
+    <%= image_tag "first_view_logo.png", class: "pc" %>
+    <%= image_tag "first_view_logo_sp.png", class: "sp" %>
+  </div>
   <p class="text-white text-center fs-5">Starbucks LaboはStarbucks coffeeのドリンクを追加カスタマイズする事で生まれる
   <br>自分だけの新しい一杯をシェアできるサービスです</p>
   <div class="text-center mt-5"><%= link_to "入口はこちら", new_user_registration_path, class: "entry-btn text-decoration-none" %></div>

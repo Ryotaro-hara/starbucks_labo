@@ -66,6 +66,14 @@
   opacity: 0.5;
 }
 
+.pc { display: inline-block !important; }
+.sp { display: none !important; }
+
+@media screen and (max-width: 768px) {
+  .pc { display: none !important; }
+  .sp { display: inline-block !important; }
+}
+
 /*seasonal*/
 .seasonal {
   background-image: url(seasonal.jpg);
