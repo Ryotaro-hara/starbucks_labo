@@ -76,7 +76,7 @@ RSpec.describe "Posts", type: :system do
           end
 
           it "「2」をクリックすると次のページに遷移する事" do
-            within ".posts-list .pagination" do
+            within ".index-paginate" do
               click_on "2", match: :first
             end
             expect(current_path).to eq "/posts/page/2"
@@ -404,6 +404,36 @@ RSpec.describe "Posts", type: :system do
       it "投稿をクリックすると詳細に遷移する事" do
         click_on post.title
         expect(current_path).to eq post_path(post)
+      end
+    end
+  end
+
+  describe "投稿検索機能テスト" do
+    let!(:another_post) { create(:post, title: "検索機能表示テスト", content: "検索機能表示テスト", user: user) }
+
+    before do
+      login(user)
+      root_path
+    end
+
+    describe "表示テスト" do
+      it "検索した内容を含む投稿を表示する事" do
+        fill_in "q[content_cont]", with: "検索機能"
+        click_on "検索"
+        expect(page).to have_content another_post.title
+      end
+
+      it "検索した内容を含まない投稿を表示しない事" do
+        fill_in "q[content_cont]", with: "検索機能"
+        click_on "検索"
+        expect(page).not_to have_content post.title
+      end
+    end
+
+    describe "遷移テスト" do
+      it "投稿をクリックすると詳細に遷移する事" do
+        click_on another_post.title
+        expect(current_path).to eq post_path(another_post)
       end
     end
   end

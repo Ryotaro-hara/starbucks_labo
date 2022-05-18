@@ -173,4 +173,14 @@ RSpec.describe "Posts", type: :request do
       expect(response).to have_http_status(200)
     end
   end
+
+  describe "GET #search" do
+    before do
+      get search_posts_path
+    end
+
+    it "リクエストが成功する事" do
+      expect(response).to have_http_status(200)
+    end
+  end
 end

@@ -8,8 +8,11 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show, :edit, :update]
   resources :posts do
-    get "page/:page", action: :index, on: :collection
-    get :seasonal, action: :seasonal, on: :collection
+    collection do
+      get "page/:page", action: :index
+      get :seasonal, action: :seasonal
+      get 'search'
+    end
     resources :comments, only: [:create, :destroy]
     resource :favorites, only: [:create, :destroy]
   end
