@@ -1,7 +1,8 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :seasonal]
+  before_action :authenticate_user!, except: [:index, :seasonal, :search]
   before_action :set_target_post, only: [:show, :edit, :update, :destroy]
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
+  before_action :set_q, only: [:index, :search]
 
   MAX_LIKED_POSTS_COUNT = 5
 
@@ -50,6 +51,11 @@ class PostsController < ApplicationController
     @posts = Post.where(drink_type: "期間限定ドリンク").order(created_at: :desc).page(params[:page])
   end
 
+  def search
+    @results = @q.result.page(params[:page])
+    @count = @q.result.count
+  end
+
   private
 
   def post_params
@@ -65,5 +71,9 @@ class PostsController < ApplicationController
     if @post.user_id != current_user.id
       redirect_to root_path, alert: "他のユーザーの投稿は編集できません"
     end
+  end
+
+  def set_q
+    @q = Post.ransack(params[:q])  
   end
 end
