@@ -1,32 +1,10 @@
-<% provide(:title,  "投稿一覧") %>
-<div class="first-view">
-  <div class="text-center py-4">
-    <%= image_tag "first_view_logo.png", class: "pc" %>
-    <%= image_tag "first_view_logo_sp.png", class: "sp" %>
-  </div>
-  <p class="text-white text-center fs-5">Starbucks LaboはStarbucks coffeeのドリンクを追加カスタマイズする事で生まれる
-  <br>自分だけの新しい一杯をシェアできるサービスです</p>
-  <div class="text-center mt-5"><%= link_to "入口はこちら", new_user_registration_path, class: "entry-btn text-decoration-none" %></div>
-</div>
-<div class="text-center bg-white py-4">
-  <h5 class="text-success py-3 border border-success">人気のカスタマイズ</h5>
-</div>
-<%= render partial: "carousel", locals: { all_ranks: @all_ranks } %>
-<div class="seasonal pt-5">
-  <div class="col-sm-8 col-9 text-success text-center ps-3">
-    <h3 class="pt-5">期間限定のカスタマイズ</h3>
-    <p class="pt-5">季節限定のドリンクのカスタマイズを<br>楽しみたい方はこちら</p>
-    <div class="text-center pt-5"><%= link_to "期間限定ページ", seasonal_posts_path, class: "seasnal-btn text-decoration-none" %></div>
-  </div>
-</div>
-<div class="bg-white py-3"></div>
-<div class="container-fluid posts-list">
-  <%= search_form_for @q, class: "d-flex py-5 w-75 m-auto", url: search_posts_path do |f| %>
-    <%= f.search_field :content_cont, class: "form-control me-2", type: "search", placeholder: "ドリンク名" %>
-    <%= f.submit "検索", class: "btn btn-outline-success", type: "submit" %>
-  <% end %>
+<div class="search-container-fluid posts-list">
   <div class="row mx-2">
-    <% @posts.each do |post| %>
+    <div class="py-4">
+      <h4>検索キーワード: <%= params[:q][:content_cont] if params[:q] %></h4>
+      <h4>投稿数: <%= @count %>件</h4>
+    </div>
+    <% @results.each do |post| %>
       <div class="col-sm-6 col-lg-4 col-xl-3">
         <%= link_to post_path(post.id), class: "text-decoration-none text-black" do %>
           <div class="card">
@@ -65,4 +43,4 @@
   </div>
 </div>
 
-<%= paginate @posts %>
+<%= paginate @results %>
