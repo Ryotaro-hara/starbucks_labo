@@ -76,7 +76,7 @@ RSpec.describe "Posts", type: :system do
           end
 
           it "「2」をクリックすると次のページに遷移する事" do
-            within ".posts-list .pagination" do
+            within ".index-paginate" do
               click_on "2", match: :first
             end
             expect(current_path).to eq "/posts/page/2"
