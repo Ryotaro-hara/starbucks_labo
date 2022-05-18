@@ -74,6 +74,6 @@ class PostsController < ApplicationController
   end
 
   def set_q
-    @q = Post.ransack(params[:q])  
+    @q = Post.ransack(params[:q])
   end
 end
