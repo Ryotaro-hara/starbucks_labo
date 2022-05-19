@@ -32,11 +32,11 @@ Starbucks　Laboはstarbucks coffeeのドリンクの自分だけのお気に入
 
 *投稿詳細ページ
 
-![starbucks-labo3](https://user-images.githubusercontent.com/94495458/168611867-9d180999-b9a5-44fb-a681-96bbc53267f3.png)
+![starbucks-labo2](https://user-images.githubusercontent.com/94495458/169180923-b393ba68-facf-451d-a1c6-515c6fd12364.png)
 
 *マイページ
 
-![starbucks-labo4](https://user-images.githubusercontent.com/94495458/168612023-a7a89b49-8b92-4255-86fd-04d5464c1407.png)
+![starbucks-labo3](https://user-images.githubusercontent.com/94495458/169180954-6f2f3962-8c25-4b7d-ab0f-52c8e7d3af56.png)
 
 ## 使用技術
 
