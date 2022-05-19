@@ -58,6 +58,8 @@ Starbucks　Laboはstarbucks coffeeのドリンクの自分だけのお気に入
 * コメント機能
 * ページネーション機能(kaminari)
 * 期間限定ページ機能
+* 検索機能(ransack)
+* Twitterシェア機能
 
 ## テスト
 
