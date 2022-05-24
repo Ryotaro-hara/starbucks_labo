@@ -7,7 +7,7 @@ class PostsController < ApplicationController
   MAX_LIKED_POSTS_COUNT = 5
 
   def index
-    @posts = Post.page(params[:page])
+    @posts = Post.page(params[:page]).includes(:user)
     @all_ranks = Post.find(Favorite.group(:post_id).order("count(post_id) desc").limit(MAX_LIKED_POSTS_COUNT).pluck(:post_id))
   end
 
@@ -48,7 +48,7 @@ class PostsController < ApplicationController
   end
 
   def seasonal
-    @posts = Post.where(drink_type: "期間限定ドリンク").order(created_at: :desc).page(params[:page])
+    @posts = Post.where(drink_type: "期間限定ドリンク").includes(:user).order(created_at: :desc).page(params[:page])
   end
 
   def search
